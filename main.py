@@ -1,4 +1,5 @@
-from turtle import Screen, Turtle
+from turtle import Screen
+from snake import Snake
 import time
 
 screen = Screen()
@@ -7,27 +8,13 @@ screen.bgcolor("black")
 screen.title("Ana the Conda")
 screen.tracer(0)
 
-starting_position = [(0,0), (-20, 0), (-40,0)]
-
-segments = []
-
-for position in starting_position:
-    new_segment = Turtle("square")
-    new_segment.color("white")
-    new_segment.penup()
-    new_segment.goto(position)
-    segments.append(new_segment)
-
+snake = Snake()
 
 game_is_on = True
 while game_is_on:
     screen.update()
     time.sleep(0.1)
 
-    for seg_num in range(len(segments) - 1, 0, -1):
-        seg_2_x = segments[seg_num - 1].xcor()
-        seg_2_y = segments[seg_num - 1].ycor()
-        segments[seg_num].goto(seg_2_x, seg_2_y)
-    segments[0].forward(20)
+    snake.move()
 
 screen.exitonclick()
