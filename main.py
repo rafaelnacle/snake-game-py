@@ -3,6 +3,8 @@ from snake import Snake
 from food import Food
 import time
 
+FOOD_COLLISION_DISTANCE = 15
+
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
@@ -22,7 +24,10 @@ game_is_on = True
 while game_is_on:
     screen.update()
     time.sleep(0.1)
-
     snake.move()
+
+    # Detect collision with the food
+    if snake.head.distance(food) < FOOD_COLLISION_DISTANCE:
+        food.refresh()
 
 screen.exitonclick()
